@@ -1,13 +1,13 @@
 #include "colorcoder.h"
-#include <assert.h>
+#include <cassert>
 #include <iostream>
 
 using namespace TelCoColorCoder;
 
 void testNumberToPair(int pairNumber, MajorColor expectedMajor, MinorColor expectedMinor) {
     ColorPair colorPair = GetColorFromPairNumber(pairNumber);
-    assert(colorPair.getMajorColor() == expectedMajor);
-    assert(colorPair.getMinorColor() == expectedMinor);
+    assert(colorPair.major == expectedMajor);
+    assert(colorPair.minor == expectedMinor);
 }
 
 void testPairToNumber(MajorColor major, MinorColor minor, int expectedPairNumber) {
@@ -16,11 +16,16 @@ void testPairToNumber(MajorColor major, MinorColor minor, int expectedPairNumber
 }
 
 void runTests() {
-    testNumberToPair(4, WHITE, BROWN);
-    testNumberToPair(5, WHITE, SLATE);
+    testNumberToPair(4, MajorColor::WHITE, MinorColor::BROWN);
+    testNumberToPair(23, MajorColor::VIOLET, MinorColor::GREEN);
 
-    testPairToNumber(RED, BLUE, 6);
-    testPairToNumber(VIOLET, SLATE, 25);
+    testPairToNumber(MajorColor::RED, MinorColor::BLUE, 6);
+    testPairToNumber(MajorColor::VIOLET, MinorColor::SLATE, 25);
 
     std::cout << "All tests passed!\n";
+}
+
+int main() {
+    runTests();
+    return 0;
 }
